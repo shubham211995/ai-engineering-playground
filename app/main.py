@@ -21,4 +21,5 @@ def greet(name: str):
 
 @app.post("/users")
 def create_user(user: CreateUser):
-    return {"message": f"User {user.username} with email {user.email} created successfully!"}
+    return {"message": f"User {user.username} with email {user.email} created successfully!",
+            "user":user.model_dump()}
