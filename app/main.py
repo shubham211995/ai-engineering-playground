@@ -41,3 +41,11 @@ def get_user(user_id: int):
     if user is None:
         return {"error": "User not found"}
     return user
+
+@app.delete("/users/{user_id}")
+def delete_user(user_id: int):
+    if user_id in users:
+        del users[user_id]
+        return {"message": "User deleted successfully"}
+    else:
+        return {"error": "User not found"}
