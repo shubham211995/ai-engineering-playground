@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.schemas import user
 from app.schemas.user import CreateUser
-from app.services import user_service
+from app.services.user_service import user_service
 
 
 app = FastAPI(title="AI Engineering Playground")

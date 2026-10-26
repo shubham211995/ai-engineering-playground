@@ -22,3 +22,5 @@ class UserService:
             return {"message": "User deleted successfully"}
         else:
             return {"error": "User not found"}
+
+user_service = UserService()
