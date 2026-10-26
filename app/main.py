@@ -1,11 +1,8 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from app.schemas.user import CreateUser
+
 
 app = FastAPI(title="AI Engineering Playground")
-
-class CreateUser(BaseModel):
-    Name: str
-    Age: str
 
 users: dict[int, dict] = {}
 next_user_id = 1
