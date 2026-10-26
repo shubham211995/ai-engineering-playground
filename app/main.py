@@ -1,5 +1,7 @@
 from fastapi import FastAPI
+from app.schemas import user
 from app.schemas.user import CreateUser
+from app.services import user_service
 
 
 app = FastAPI(title="AI Engineering Playground")
@@ -22,27 +24,12 @@ def greet(name: str):
 
 @app.post("/users", status_code=201)
 def create_user(user: CreateUser):
-    global next_user_id
-    user_id = next_user_id
-    newuser={
-        "id": user_id,
-        **user.model_dump()
-    }
-    users[user_id] = newuser
-    next_user_id += 1
-    return newuser
+    return user_service.create_user(user)
 
 @app.get("/users/{user_id}")
 def get_user(user_id: int):
-    user = users.get(user_id)
-    if user is None:
-        return {"error": "User not found"}
-    return user
+    return user_service.get_user(user_id)
 
 @app.delete("/users/{user_id}")
 def delete_user(user_id: int):
-    if user_id in users:
-        del users[user_id]
-        return {"message": "User deleted successfully"}
-    else:
-        return {"error": "User not found"}
+    return user_service.delete_user(user_id)
